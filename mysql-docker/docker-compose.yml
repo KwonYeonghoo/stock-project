@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    image: custom-mysql:1.0
+    volumes:
+      - ./database:/var/lib/mysql
+      - ./conf:/etc/mysql/conf.d
+      - ./init:/docker-entrypoint-initdb.d/
+    restart: always
+    container_name: custom-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root1234
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
