@@ -20,25 +20,14 @@ DB_CHARSET = os.getenv("DB_CHARSET")
 # Gemini configuration
 GEM_API_KEY = os.getenv("GEM_API_KEY")
 genai.configure(api_key=GEM_API_KEY)
-genai_config = genai.GenerationConfig(temperature = 0.8)
+genai_config = genai.GenerationConfig(temperature = 1.0)
 MODEL = genai.GenerativeModel(model_name = 'gemini-pro', generation_config=genai_config)
 
 def generate_report(date, ticker, name, industry, price, volume, pct_change,
                         market_cap, dividend_rate, dividend_yield, per, news_summaries, 
                         avg_per, avg_pct_change):
         prompt = f"""
-        답변은 반드시 한국어로 작성할 것.
-        아래의 주어진 정보들을 활용하여 일간 주식 리포트를 만들고싶어.
-        날짜:{date}
-        종목코드:{ticker}, 종목명:{name}, 속한 산업군:{industry}
-        현재 가격:{price}, 거래량:{volume}, 전날대비 등락률:{pct_change}, 시가총액:{market_cap}
-        배당률:{dividend_rate}, 배당금:{dividend_yield}, PER:{per}
-        {industry}산업군의 PER 평균:{avg_per}, {industry}산업군의 전날대비 등락률 평균:{avg_pct_change}
-        {ticker}관련 뉴스요약:{news_summaries}
-        
-        꼭 포함돼야할 정보는 다음과 같아.
-        1. 해당 종목과 산업군 간의 PER을 비교하여 분석한 내용
-        2. 뉴스요약문들을 종합한 다섯 줄 이내의 뉴스 요약
+        {ticker} 볼린저밴드 분석해줘
         """
         try:
             report = MODEL.generate_content(prompt).text
@@ -47,6 +36,8 @@ def generate_report(date, ticker, name, industry, price, volume, pct_change,
 
         except Exception as e:
             return "gemini 오류 발생"
+        
+        
 # 애플리케이션 생성
 app = Flask(__name__)
 # Flask-SQLAlchemy db configuration
