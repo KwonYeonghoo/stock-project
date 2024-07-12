@@ -38,3 +38,5 @@ out/
 
 .env
 *.pyc
+
+mysql-docker/
