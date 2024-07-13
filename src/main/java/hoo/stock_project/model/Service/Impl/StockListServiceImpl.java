@@ -1,5 +1,8 @@
 package hoo.stock_project.model.Service.Impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +33,22 @@ public class StockListServiceImpl implements StockListService{
         dto.setIndustry(entity.getIndustry());
 
         return dto;
+    }
+
+    @Override
+    public List<StockListDTO> getAllStockOrderByTicker() {
+        // TODO Auto-generated method stub
+        List<StockListEntity> entities = stockListDao.getAllStockOrderByTicker();
+        List<StockListDTO> dtos = new ArrayList<>();
+        for (StockListEntity entity : entities) {
+            StockListDTO dto = new StockListDTO();
+            dto.setTicker(entity.getTicker());
+            dto.setName(entity.getName());
+            dto.setIndustry(entity.getIndustry());
+
+            dtos.add(dto);
+        }
+        return dtos;
     }
 
     @Override

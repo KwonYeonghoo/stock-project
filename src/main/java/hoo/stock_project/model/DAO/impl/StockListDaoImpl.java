@@ -1,5 +1,7 @@
 package hoo.stock_project.model.DAO.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,13 @@ public class StockListDaoImpl implements StockListDao{
         // TODO Auto-generated method stub
         StockListEntity entity = stockListRepository.findByTicker(ticker);
         return entity;
+    }
+
+    @Override
+    public List<StockListEntity> getAllStockOrderByTicker() {
+        // TODO Auto-generated method stub
+        List<StockListEntity> entities = stockListRepository.findAllByOrderByTicker();
+        return entities;
     }
 
     @Override
