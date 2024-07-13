@@ -29,28 +29,114 @@
     <!-- App Header -->
     <div class="appHeader">
         <div class="left">
-            <a href="#" class="headerButton goBack">
-                <ion-icon name="chevron-back-outline"></ion-icon>
+            <a href="#" class="headerButton">
+                <ion-icon name="chevron-back-outline" role="img" class="md hydrated" aria-label="chevron back outline"></ion-icon>
             </a>
         </div>
-        <div class="pageTitle">
-            My Portfolio
-        </div>
+        <div class="pageTitle">내 포트폴리오</div>
         <div class="right">
-            <a href="crypto-exchange.html" class="headerButton">
-                <ion-icon name="add"></ion-icon>
+            <a href="#" class="headerButton">
+                <span class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddPortfolio">+</span>
             </a>
         </div>
     </div>
     <!-- * App Header -->
+    
+    <!-- Add Portfolio -->
+    <div class="modal fade modalbox" id="AddPortfolio" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">포트폴리오 추가</h5>
+                    <a href="#" data-bs-dismiss="modal">닫기</a>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <script src="/js/lib/addPortfolio.js"></script>
+                            <form id="portfolioForm">
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="portfolioName">포트폴리오명</label>
+                                        <input type="text" class="form-control" id="portfolioName" placeholder="입력">
+                                        <i class="clear-input">
+                                            <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
+                                        </i>
+                                    </div>
+                                    <div class="input-info">포트폴리오명을 입력해주세요!</div>
+                                </div>
+        
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="portfolioDetail">설명 (선택)</label>
+                                        <input type="text" class="form-control" id="portfolioDetail" placeholder="입력">
+                                        <i class="clear-input">
+                                            <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
+                                        </i>
+                                    </div>
+                                    <div class="input-info">어떤 포트폴리오인지 설명해주세요!</div>
+                                </div>
+                            </form>
+                            <button type="button" class="btn btn-primary btn-block" onclick="submitForm()">포트폴리오 추가</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- * Add Portfolio -->
+
 
 
     <!-- App Capsule -->
     <div id="appCapsule">
-
+        {{#portfolios}}
         <!-- Top Coins -->
         <div class="section mt-2">
-            <div class="section-title">Top Coins</div>
+            <div class="section-title">{{portfolioName}} <button type="button" class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#AddStocks">종목 추가하기</button> </div>
+            <!-- Add stocks -->
+            <div class="modal fade modalbox" id="AddStocks" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">종목 추가</h5>
+                            <a href="#" data-bs-dismiss="modal">닫기</a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group searchbox">
+                                        <input type="text" class="form-control">
+                                        <i class="input-icon">
+                                            <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        {{#stock_list}}
+                                        <div class="col-6 mb-2">
+                                            <div class="bill-box">
+                                                <div class="img-wrapper">
+                                                    <img src="assets/img/sample/brand/1.jpg" alt="img" class="image-block imaged w48">
+                                                </div>
+                                                <div class="price" id="Ticker">{{ticker}}</div>
+                                                <p>{{name}}</p>
+                                                <script src="/js/lib/addStock.js"></script>
+                                                <a href="#" class="btn btn-primary btn-block btn-sm" onclick="addStock('{{portfolioId}}', '{{ticker}}')">추가</a>
+                                            </div>
+                                        </div>
+                                        {{/stock_list}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- * Add stocks -->
             <div class="card">
                 <ul class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1">
                     <!-- item -->
@@ -61,83 +147,14 @@
                             </div>
                             <div class="in">
                                 <div>
-                                    <strong>Bitcoin</strong>
-                                    <div class="text-small text-secondary">0.053201 BTC</div>
+                                    <strong>NVDA</strong>
+                                    <div class="text-small text-secondary">NVIDIA Corp.</div>
                                 </div>
                                 <div class="text-end">
-                                    <strong>$5,503.30</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            2.59%
-                                        </span>
+                                    <div class="text-end">
+                                        <strong>수량: 300주</strong>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Ethereum</strong>
-                                    <div class="text-small text-secondary">45.5469 ETH</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$1,246.47</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-danger">
-                                <ion-icon name="trending-down-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Cardano</strong>
-                                    <div class="text-small text-secondary">251.48 ADA</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$316.50</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-danger">
-                                            <ion-icon name="arrow-down-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Tether</strong>
-                                    <div class="text-small text-secondary">45.5469 USDT</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$45.54</strong>
+                                    <strong>$128.30</strong>
                                     <div class="text-small">
                                         <span class="badge badge-success">
                                             <ion-icon name="arrow-up-outline"></ion-icon>
@@ -153,268 +170,7 @@
             </div>
         </div>
         <!-- Top Coins -->
-
-        <!-- Most Active -->
-        <div class="section mt-2">
-            <div class="section-title">Most Active</div>
-            <div class="card">
-                <ul class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1">
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Bitcoin</strong>
-                                    <div class="text-small text-secondary">0.053201 BTC</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$5,503.30</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Ethereum</strong>
-                                    <div class="text-small text-secondary">45.5469 ETH</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$1,246.47</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Litecoin</strong>
-                                    <div class="text-small text-secondary">45.61 LTC</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$409.90</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            62.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>USD Coin</strong>
-                                    <div class="text-small text-secondary">45.5469 USDC</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$45.54</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                </ul>
-            </div>
-        </div>
-        <!-- Most Active -->
-
-        <!-- Others -->
-        <div class="section mt-2 mb-3">
-            <div class="section-title">Others</div>
-            <div class="card">
-                <ul class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1">
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Dogecoin</strong>
-                                    <div class="text-small text-secondary">34,525.50 DOGE</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$35,258.32</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            5.49%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-danger">
-                                <ion-icon name="trending-down-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>TRON</strong>
-                                    <div class="text-small text-secondary">452.23 TRX</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$512.37</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-danger">
-                                            <ion-icon name="arrow-down-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-danger">
-                                <ion-icon name="trending-down-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Cardano</strong>
-                                    <div class="text-small text-secondary">251.48 ADA</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$316.50</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-danger">
-                                            <ion-icon name="arrow-down-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Tether</strong>
-                                    <div class="text-small text-secondary">45.5469 USDT</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$45.54</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Bitcoin</strong>
-                                    <div class="text-small text-secondary">0.053201 BTC</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$5,503.30</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                    <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>Ethereum</strong>
-                                    <div class="text-small text-secondary">45.5469 ETH</div>
-                                </div>
-                                <div class="text-end">
-                                    <strong>$1,246.47</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- * item -->
-                </ul>
-            </div>
-        </div>
-        <!-- Others -->
-
-
+    {{/portfolios}}
     </div>
     <!-- * App Capsule -->
 
