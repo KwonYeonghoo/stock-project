@@ -8,14 +8,18 @@ import org.springframework.stereotype.Service;
 
 import hoo.stock_project.model.DAO.PortfolioStockInfoDao;
 import hoo.stock_project.model.DTO.PortfolioStockInfoDTO;
+import hoo.stock_project.model.DTO.PortfolioStockInterface;
 import hoo.stock_project.model.Entity.PortfolioStockInfoEntity;
 import hoo.stock_project.model.Entity.PortfolioStockInfoPK;
+import hoo.stock_project.model.Repository.PortfolioStockInfoRepository;
 import hoo.stock_project.model.Service.PortfolioStockInfoService;
 
 @Service
 public class PortfolioStockInfoServiceImpl implements PortfolioStockInfoService{
     @Autowired
     private PortfolioStockInfoDao portfolioStockInfoDao;
+    @Autowired
+    private PortfolioStockInfoRepository portfolioStockInfoRepository;
 
     @Override
     public List<PortfolioStockInfoDTO> getPortfolioStockInfo(Integer portfolioId) {
@@ -32,6 +36,13 @@ public class PortfolioStockInfoServiceImpl implements PortfolioStockInfoService{
         }
 
         return dtos;
+    }
+
+    @Override
+    public List<PortfolioStockInterface> getEachPortfolioStock(Integer portfolio_id) {
+        // TODO Auto-generated method stub
+        List<PortfolioStockInterface> portfolioStocks = portfolioStockInfoRepository.findEachPortfolioStock(portfolio_id);
+        return portfolioStocks;
     }
 
     @Override
