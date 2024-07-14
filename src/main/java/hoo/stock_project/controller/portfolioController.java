@@ -21,10 +21,12 @@ import hoo.stock_project.model.Service.PortfolioInfoService;
 import hoo.stock_project.model.Service.PortfolioStockInfoService;
 import hoo.stock_project.model.Service.StockDailyInfoService;
 import hoo.stock_project.model.Service.StockListService;
+import lombok.extern.slf4j.Slf4j;
 
 
 @Controller
 @RequestMapping("/v1/stock/portfolio")
+@Slf4j
 public class portfolioController {
     @Autowired
     private StockDailyInfoService stockDailyInfoService;
@@ -38,9 +40,9 @@ public class portfolioController {
     @GetMapping("/")
     public String getPortfolioPage(Model model){
         List<PortfolioInfoDTO> portfolios =  portfolioInfoService.getAllPortfolio();
-        List<StockListDTO> stock_list = stockListService.getAllStockOrderByTicker();
-
         model.addAttribute("portfolios", portfolios);
+
+        List<StockListDTO> stock_list = stockListService.getAllStockOrderByTicker();
         model.addAttribute("stock_list", stock_list);
         
         return "portfolio";
@@ -54,8 +56,8 @@ public class portfolioController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/{ticker}")
-    public ResponseEntity<Void> addStock(@PathVariable String ticker, @RequestBody PortfolioStockInfoDTO dto) {
+    @PutMapping("/{portfolioId}/{ticker}")
+    public ResponseEntity<Void> addPortfolioStock(@PathVariable Integer portfolioId, @PathVariable String ticker, @RequestBody PortfolioStockInfoDTO dto) {
         portfolioStockInfoService.addPortfolioStockInfo(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

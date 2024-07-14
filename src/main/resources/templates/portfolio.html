@@ -16,6 +16,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/img/icon/192x192.png">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="manifest" href="__manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script> <!-- Mustache.js 라이브러리 추가 -->
 </head>
 
 <body>
@@ -53,7 +54,6 @@
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-body">
-                            <script src="/js/lib/addPortfolio.js"></script>
                             <form id="portfolioForm">
                                 <div class="form-group basic">
                                     <div class="input-wrapper">
@@ -93,7 +93,7 @@
         {{#portfolios}}
         <!-- Top Coins -->
         <div class="section mt-2">
-            <div class="section-title">{{portfolioName}} <button type="button" class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#AddStocks">종목 추가하기</button> </div>
+            <div class="section-title">{{portfolioName}} <button type="button" class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#AddStocks" data-modal-portfolio-id="{{portfolioId}}">종목 추가하기</button> </div>
             <!-- Add stocks -->
             <div class="modal fade modalbox" id="AddStocks" tabindex="-1" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -124,8 +124,7 @@
                                                 </div>
                                                 <div class="price" id="Ticker">{{ticker}}</div>
                                                 <p>{{name}}</p>
-                                                <script src="/js/lib/addStock.js"></script>
-                                                <a href="#" class="btn btn-primary btn-block btn-sm" onclick="addStock('{{portfolioId}}', '{{ticker}}')">추가</a>
+                                                <a href="#" class="btn btn-primary btn-block btn-sm" onclick="addStock('{{ticker}}')">추가</a>
                                             </div>
                                         </div>
                                         {{/stock_list}}
@@ -138,33 +137,9 @@
             </div>
             <!-- * Add stocks -->
             <div class="card">
-                <ul class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1">
+                <ul class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1" id="portfolioStockContainer" data-portfolio-id="{{portfolioId}}">
                     <!-- item -->
-                    <li>
-                        <div class="item">
-                            <div class="icon-box text-success">
-                                <ion-icon name="trending-up-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <strong>NVDA</strong>
-                                    <div class="text-small text-secondary">NVIDIA Corp.</div>
-                                </div>
-                                <div class="text-end">
-                                    <div class="text-end">
-                                        <strong>수량: 300주</strong>
-                                    </div>
-                                    <strong>$128.30</strong>
-                                    <div class="text-small">
-                                        <span class="badge badge-success">
-                                            <ion-icon name="arrow-up-outline"></ion-icon>
-                                            2.59%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    #####
                     <!-- * item -->
                 </ul>
             </div>
@@ -223,7 +198,10 @@
     <script src="/js/plugins/apexcharts/apexcharts.min.js"></script>
     <!-- Base Js File -->
     <script src="/js/base.js"></script>
-
+    
+    <script src="/js/lib/addPortfolio.js"></script>
+    <script src="/js/lib/addPortfolioStock.js"></script>
+    <script src="/js/lib/getPortfolioStock.js"></script>
 
 </body>
 

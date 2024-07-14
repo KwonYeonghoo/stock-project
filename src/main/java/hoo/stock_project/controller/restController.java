@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hoo.stock_project.model.DTO.PortfolioStockInfoDTO;
+import hoo.stock_project.model.DTO.PortfolioStockInterface;
 import hoo.stock_project.model.Service.PortfolioInfoService;
 import hoo.stock_project.model.Service.PortfolioStockInfoService;
 import hoo.stock_project.model.Service.StockListService;
@@ -24,8 +24,8 @@ public class restController {
     private StockListService stockListService;
 
     @GetMapping("/portfolio/{portfolioId}")
-    public List<PortfolioStockInfoDTO> getPortfolioStockInfo(@PathVariable Integer portfolioId) {
-        List<PortfolioStockInfoDTO> dtos =  portfolioStockInfoService.getPortfolioStockInfo(portfolioId);
-        return dtos;
+    public List<PortfolioStockInterface> getPortfolioStockInfo(@PathVariable Integer portfolioId) {
+        List<PortfolioStockInterface> portfolioStocks = portfolioStockInfoService.getEachPortfolioStock(portfolioId);
+        return portfolioStocks;
     }
 }
