@@ -18,6 +18,7 @@ function submitForm() {
         if (response.status === 201) {
             alert('포트폴리오가 성공적으로 추가되었습니다!');
             document.getElementById('portfolioForm').reset();
+            location.reload();
         } else {
             alert('포트폴리오 추가에 실패하였습니다!');
         }

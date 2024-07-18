@@ -124,7 +124,7 @@
                                                 </div>
                                                 <div class="price" id="Ticker">{{ticker}}</div>
                                                 <p>{{name}}</p>
-                                                <a href="#" class="btn btn-primary btn-block btn-sm" onclick="addStock('{{ticker}}')">추가</a>
+                                                <button type=“button” class="btn btn-primary btn-block btn-sm" data-bs-toggle="modal" data-bs-target="#AmountInput" data-modal-ticker="{{ticker}}">추가</button>
                                             </div>
                                         </div>
                                         {{/stock_list}}
@@ -136,6 +136,38 @@
                 </div>
             </div>
             <!-- * Add stocks -->
+            <!-- 수량 입력 받는 모달창 -->
+            <div class="modal fade modalbox" id="AmountInput" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">수량 입력</h5>
+                            <a href="#" data-bs-dismiss="modal">닫기</a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form id="amountForm">
+                                        <div class="form-group basic">
+                                            <div class="input-wrapper">
+                                                <label class="label" for="stockAmount">보유 수량</label>
+                                                <input type="text" class="form-control" id="stockAmount" placeholder="입력">
+                                                <i class="clear-input">
+                                                    <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
+                                                </i>
+                                            </div>
+                                            <div class="input-info">보유 수량을 입력해주세요!</div>
+                                        </div>
+                                    </form>
+                                    <button type="button" class="btn btn-primary btn-block" onclick="addStock()">종목 추가</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- * 수량 입력받는 모달창 -->
+            <!-- 포트폴리오 구성종목 리스트 -->
             <div class="card">
                 <ul class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1" id="portfolioStockContainer" data-portfolio-id="{{portfolioId}}">
                     <!-- item -->
@@ -143,6 +175,7 @@
                     <!-- * item -->
                 </ul>
             </div>
+            <!-- * 포트폴리오 구성종목 리스트 -->
         </div>
         <!-- Top Coins -->
     {{/portfolios}}

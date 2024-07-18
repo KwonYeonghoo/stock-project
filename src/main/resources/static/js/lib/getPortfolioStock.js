@@ -10,13 +10,20 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             const formattedId = `portfolio${currentPortfolioId}`;
-            window[formattedId] = data;
+            window[formattedId] = data.map(stock => ({
+                ...stock,
+                badgeClass: stock.pct_change < 0 ? 'badge-danger' : 'badge-success',
+                icon: stock.pct_change < 0 ? 'arrow-down-outline' : 'arrow-up-outline',
+                // 나중에 포트폴리오 수익률 기준으로 수정하기
+                trendColor: stock.pct_change < 0 ? 'text-danger' : 'text-success',
+                trendArrow: stock.pct_change < 0 ? 'trending-down-outline' : 'trending-up-outline'
+            }));
             const template = `
             {{#${formattedId}}}
             <li>
                 <div class="item">
-                    <div class="icon-box text-success">
-                        <ion-icon name="trending-up-outline"></ion-icon>
+                    <div class="icon-box {{trendColor}}">
+                        <ion-icon name="{{trendArrow}}"></ion-icon>
                     </div>
                     <div class="in">
                         <div>
@@ -29,8 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                             <strong>{{price}}</strong>
                             <div class="text-small">
-                                <span class="badge badge-success">
-                                    <ion-icon name="arrow-up-outline"></ion-icon>
+                                <span class="badge {{badgeClass}}">
+                                    <ion-icon name="{{icon}}"></ion-icon>
                                     {{pct_change}}
                                 </span>
                             </div>
@@ -53,4 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
             currentPortfolioId = parseInt(container.getAttribute('data-portfolio-id'), 10);
             createPortfolioStockElement(currentPortfolioId);
     });
+
+
 });

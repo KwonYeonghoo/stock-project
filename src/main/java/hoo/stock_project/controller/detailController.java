@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import hoo.stock_project.model.DTO.StockListDTO;
 import hoo.stock_project.model.Service.StockDailyInfoService;
 import hoo.stock_project.model.Service.StockListService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Tag(name="DetailPage API", description = "종목별 상세정보 페이지를 조회하는 API입니다.")
 @RequestMapping("/v1/stock/detail")
 @Controller
 public class detailController {
@@ -25,6 +28,7 @@ public class detailController {
     // @Autowired
     // private IndustryInfoService industryInfoService;
 
+    @Operation(summary = "종목별 상세페이지를 조회", description = "파라미터로 받은 종목의 상세정보를 조회합니다.")
     @GetMapping("/{ticker}")
     public String getDetailPage(@PathVariable String ticker, Model model){
         String today = stockDailyInfoService.getMostRecentDate();
