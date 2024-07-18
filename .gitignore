@@ -40,3 +40,4 @@ out/
 *.pyc
 
 mysql-docker/
+.DS_Store
