@@ -87,3 +87,17 @@
                   console.log("rendered: ", rendered);
                   document.querySelector(`[data-portfolio-id="${currentPortfolioId}"]`).innerHTML = rendered;
                 ```
+---
+- **7/18 - 포트폴리오 & 종목상세 페이지 완성(예정)**
+- **포트폴리오**
+    - 종목추가할 때 검색기능
+    - 등락률에 따라 색깔 다르게
+    - 수정하기 버튼 생성
+    - 종목 추가 받을 때 amount도 받아야함
+    - 포트폴리오 수익률 계산
+    - 목표 수익률 기능 추가
+- **종목상세**
+    - 뉴스 요약
+    - 일간 리포트 디벨롭
+    - 볼린저밴드 추가 & 해석 제공
+    - 산업군 평균 PER지수와 비교
