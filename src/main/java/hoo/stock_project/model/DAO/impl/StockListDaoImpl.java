@@ -30,6 +30,13 @@ public class StockListDaoImpl implements StockListDao{
     }
 
     @Override
+    public List<StockListEntity> getStockByContaining(String ticker) {
+        // TODO Auto-generated method stub
+        List<StockListEntity> entities = stockListRepository.findByTickerContainingIgnoreCase(ticker);
+        return entities;
+    }
+
+    @Override
     public void deleteStock(String ticker) {
         // TODO Auto-generated method stub
         stockListRepository.deleteById(ticker);

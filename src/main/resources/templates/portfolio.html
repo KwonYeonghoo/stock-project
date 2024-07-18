@@ -106,7 +106,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group searchbox">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" id="searchTicker">
                                         <i class="input-icon">
                                             <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
                                         </i>
@@ -115,12 +115,12 @@
                             </div>
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row">
+                                    <div class="row" id="stockListContainer">
                                         {{#stock_list}}
                                         <div class="col-6 mb-2">
                                             <div class="bill-box">
                                                 <div class="img-wrapper">
-                                                    <img src="assets/img/sample/brand/1.jpg" alt="img" class="image-block imaged w48">
+                                                    <img src="/img/logo/{{ticker}}.png" alt="img" class="image-block imaged w48">
                                                 </div>
                                                 <div class="price" id="Ticker">{{ticker}}</div>
                                                 <p>{{name}}</p>
@@ -235,6 +235,7 @@
     <script src="/js/lib/addPortfolio.js"></script>
     <script src="/js/lib/addPortfolioStock.js"></script>
     <script src="/js/lib/getPortfolioStock.js"></script>
+    <script src="/js/lib/searchTicker.js"></script>
 
 </body>
 

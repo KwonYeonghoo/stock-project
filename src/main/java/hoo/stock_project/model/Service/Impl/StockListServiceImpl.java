@@ -52,6 +52,22 @@ public class StockListServiceImpl implements StockListService{
     }
 
     @Override
+    public List<StockListDTO> getStockByContaining(String ticker) {
+        // TODO Auto-generated method stub
+        List<StockListEntity> entities = stockListDao.getStockByContaining(ticker);
+        List<StockListDTO> dtos = new ArrayList<>();
+        for (StockListEntity entity : entities) {
+            StockListDTO dto = new StockListDTO();
+            dto.setTicker(entity.getTicker());
+            dto.setName(entity.getName());
+            dto.setIndustry(entity.getIndustry());
+
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
+    @Override
     public void insertStock(StockListDTO dto) {
         // TODO Auto-generated method stub
         StockListEntity entity = new StockListEntity();
