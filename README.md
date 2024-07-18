@@ -95,7 +95,7 @@
 - **종목검색 기능**
     - 한 글자씩 입력 받으며 해당 문자가 포함되는 종목 리스트 비동기 반환
     - 해당 종목 리스트 mustache template 적용시켜 렌더링
-    ![searchTicker](https://github.com/user-attachments/assets/225006d4-f9b6-4817-82e3-c05a08f959bf)
+    - ![searchTicker](https://github.com/user-attachments/assets/225006d4-f9b6-4817-82e3-c05a08f959bf)
 - **포트폴리오 개선할 점**
     - ***목표수익률, 평균단가, 평균수익률*** 계산하기
     - 수정하기 버튼 만들기
