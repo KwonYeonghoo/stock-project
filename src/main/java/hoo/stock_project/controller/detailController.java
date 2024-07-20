@@ -1,5 +1,7 @@
 package hoo.stock_project.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hoo.stock_project.model.DTO.StockListDTO;
+import hoo.stock_project.model.DTO.StockDailyInfoInterface;
+import hoo.stock_project.model.DTO.StockNewsSummaryInterface;
 import hoo.stock_project.model.Service.StockDailyInfoService;
 import hoo.stock_project.model.Service.StockListService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,16 +35,36 @@ public class detailController {
     @GetMapping("/{ticker}")
     public String getDetailPage(@PathVariable String ticker, Model model){
         String today = stockDailyInfoService.getMostRecentDate();
-        StockListDTO stock_list = stockListService.getOneStock(ticker);
-        // List<stockDailyInfoDTO> stock_daily_info =  stockDailyInfoService.getOneStockDailyInfo(ticker, today);
-        // List<stockChartInfoDTO> stock_chart_info = stockChartInfoService.getOneStockChartInfo(ticker);
-        // industryInfoDTO industry_info = industryInfoService.getOneIndustryInfo(stock_list.getIndustry(), today);
-
-        model.addAttribute("today", today);
-        model.addAttribute("ticker", stock_list.getTicker());
-        model.addAttribute("name", stock_list.getName());
-        model.addAttribute("industry", stock_list.getIndustry());
+        StockDailyInfoInterface stock_detail =  stockDailyInfoService.getStockDetail(ticker, today);
+        List<StockNewsSummaryInterface> news_summaries = stockDailyInfoService.getAllNewsSummary(ticker, today);
+        String volume = formatNumber(stock_detail.getVolume());
+        String market_cap = formatNumber(stock_detail.getMarketCap());
+        model.addAttribute("stock_detail", stock_detail);
+        model.addAttribute("formattedVolume", volume);
+        model.addAttribute("formattedMarketCap", market_cap);
+        model.addAttribute("news_summaries", news_summaries);
 
         return "detail";
+    }
+
+    public static String formatNumber(long number) {
+        double result;
+        String unit;
+
+        if (number >= 1_000_000_000_000L) {
+            result = number / 1_000_000_000_000.0;
+            unit = "조";
+        } else if (number >= 1_000_000_000L) {
+            result = number / 1_000_000_000.0;
+            unit = "억";
+        } else if (number >= 1_000_000L) {
+            result = number / 1_000_000.0;
+            unit = "백만";
+        } else {
+            result = number;
+            unit = "";
+        }
+
+        return String.format("%.1f%s", result, unit);
     }
 }

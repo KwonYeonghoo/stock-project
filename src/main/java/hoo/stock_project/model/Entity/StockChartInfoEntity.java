@@ -26,7 +26,7 @@ public class StockChartInfoEntity {
     @Column(nullable = false)
     private String ticker;
     @Column(nullable = false)
-    private String date;
+    private Long date;
     private Float open_price;
     private Float high_price;
     private Float low_price;

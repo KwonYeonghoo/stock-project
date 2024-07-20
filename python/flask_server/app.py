@@ -89,7 +89,7 @@ class IndustryInfo(db.Model):
     avg_per = db.Column(db.Float, nullable=False)
     avg_pct_change = db.Column(db.Float, nullable=False)
 
-@app.route('/report/<ticker>')
+@app.route('/v1/stock/report/<ticker>')
 def get_daily_report(ticker):
     with app.app_context():
         today = StockDailyInfo.query.order_by(desc(StockDailyInfo.date)).first().date

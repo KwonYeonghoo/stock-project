@@ -28,7 +28,7 @@ public class StockDailyInfoEntity {
     @Column(nullable = false)
     private String date;
     private Float price;
-    private Long volumne;
+    private Long volume;
     private Long avg_volume;
     private Float pct_change;
     private Long market_cap;

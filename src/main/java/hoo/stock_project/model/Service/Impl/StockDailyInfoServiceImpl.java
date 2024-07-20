@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 
 import hoo.stock_project.model.DAO.StockDailyInfoDao;
 import hoo.stock_project.model.DTO.StockDailyInfoDTO;
+import hoo.stock_project.model.DTO.StockDailyInfoInterface;
+import hoo.stock_project.model.DTO.StockNewsSummaryInterface;
 import hoo.stock_project.model.Entity.StockDailyInfoEntity;
+import hoo.stock_project.model.Repository.StockDailyInfoRepository;
 import hoo.stock_project.model.Service.StockDailyInfoService;
 
 @Service
 public class StockDailyInfoServiceImpl implements StockDailyInfoService{
     @Autowired
     private StockDailyInfoDao stockDailyInfoDao;
+    @Autowired
+    private StockDailyInfoRepository stockDailyInfoRepository;
 
     @Override
     public void deleteStockDailyInfo(Integer id) {
@@ -35,7 +40,7 @@ public class StockDailyInfoServiceImpl implements StockDailyInfoService{
             dto.setPrice(entity.getPrice());
             dto.setPct_change(entity.getPct_change());
             dto.setMarket_cap(entity.getMarket_cap());
-            dto.setVolumne(entity.getVolumne());
+            dto.setVolumne(entity.getVolume());
             dto.setAvg_volume(entity.getAvg_volume());
             dto.setPer(entity.getPer());
             dto.setDividend_rate(entity.getDividend_rate());
@@ -57,7 +62,7 @@ public class StockDailyInfoServiceImpl implements StockDailyInfoService{
     //     entity.setPrice(dto.getPrice());
     //     entity.setPct_change(dto.getPct_change());
     //     entity.setMarket_cap(dto.getMarket_cap());
-    //     entity.setVolumne(dto.getVolumne());
+    //     entity.setVolumne(dto.getVolume());
     //     entity.setAvg_volume(dto.getAvg_volume());
     //     entity.setPer(dto.getPer());
     //     entity.setDividend_rate(dto.getDividend_rate());
@@ -75,7 +80,7 @@ public class StockDailyInfoServiceImpl implements StockDailyInfoService{
     //     entity.setPrice(dto.getPrice());
     //     entity.setPct_change(dto.getPct_change());
     //     entity.setMarket_cap(dto.getMarket_cap());
-    //     entity.setVolumne(dto.getVolumne());
+    //     entity.setVolumne(dto.getVolume());
     //     entity.setAvg_volume(dto.getAvg_volume());
     //     entity.setPer(dto.getPer());
     //     entity.setDividend_rate(dto.getDividend_rate());
@@ -90,6 +95,21 @@ public class StockDailyInfoServiceImpl implements StockDailyInfoService{
         // TODO Auto-generated method stub
         String date = stockDailyInfoDao.getMostRecentDate();
         return date;
+    }
+
+    @Override
+    public List<StockNewsSummaryInterface> getAllNewsSummary(String ticker, String date) {
+        // TODO Auto-generated method stub
+        List<StockNewsSummaryInterface> news_summaries = stockDailyInfoRepository.findAllNewsSummary(ticker, date);
+        return news_summaries;
+    }
+
+    @Override
+    public StockDailyInfoInterface getStockDetail(String ticker, String date) {
+        // TODO Auto-generated method stub
+        StockDailyInfoInterface stock_detail = stockDailyInfoRepository.findStockDetail(ticker, date);
+    
+        return stock_detail;
     }
 
 }

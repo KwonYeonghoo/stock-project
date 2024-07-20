@@ -14,7 +14,7 @@ import lombok.ToString;
 public class StockChartInfoDTO {
     private Integer id;
     private String ticker;
-    private String date;
+    private Long date;
     private Float open_price;
     private Float high_price;
     private Float low_price;
