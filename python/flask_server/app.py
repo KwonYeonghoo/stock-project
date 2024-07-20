@@ -12,11 +12,11 @@ load_dotenv()
 
 # db 환경변수
 DB_HOST = os.getenv("DB_HOST")
-DB_USER = os.getenv("DB_USER")
+DB_USER = "hoo"
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 DB_NAME = os.getenv("DB_NAME")
 DB_CHARSET = os.getenv("DB_CHARSET")
-
+print(DB_USER)
 # Gemini configuration
 GEM_API_KEY = os.getenv("GEM_API_KEY")
 genai.configure(api_key=GEM_API_KEY)
@@ -46,6 +46,7 @@ app = Flask(__name__)
 #               : 이 둘 모두 MySQL 데이터베이스와 연결하는 드라이버
 #               : 나의 경우에는 MySQLdb가 정상적으로 설치가 안돼서 pymysql모듈을 사용했다.
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+print(f"후 mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)

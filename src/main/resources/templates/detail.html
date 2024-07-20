@@ -105,13 +105,30 @@
             <div class="in coin-head">
                 <h1 class="total">$ {{price}}</h1>
                 <h4 class="caption">
-                    <span class="iconbox text-success">
-                        <ion-icon name="caret-up"></ion-icon>
+                    <span id="iconbox" class="iconbox text-success">
+                        <ion-icon id="icon" name="caret-up"></ion-icon>
                     </span>
-                    {{pctChange}}%
+                    <span id="pctChange">{{pctChange}}</span>%
                 </h4>
             </div>
         </div>
+        <script>
+            var pctChangeElem = document.getElementById("pctChange");
+            var iconboxElem = document.getElementById("iconbox");
+            var iconElem = document.getElementById("icon");
+            var pctChange = pctChangeElem.textContent;
+            if(pctChange >= 0){
+                pctChangeElem.innerHTML = `+${pctChange}`;
+                iconboxElem.classList.add("text-success");
+                iconboxElem.classList.remove("text-danger");
+                iconElem.setAttribute('name', 'caret-up');
+            } else {
+                pctChangeElem.innerHTML = `${pctChange}`;
+                iconboxElem.classList.add("text-danger");
+                iconboxElem.classList.remove('text-success');
+                iconElem.setAttribute('name', 'caret-down');
+            }
+        </script>
         <!-- * Coin Status -->
 
 
@@ -156,10 +173,6 @@
         <div class="section mt-2 mb-4">
             <div class="card">
                 <ul class="listview no-line transparent flush simple-listview">
-                    <li>
-                        <div class="text-muted">전 날 대비 등락률</div>
-                        <strong class="text-success">{{pctChange}}%</strong>
-                    </li>
                     <li>
                         <div class="text-muted">시가총액</div>
                         <strong>${{formattedMarketCap}}</strong>
