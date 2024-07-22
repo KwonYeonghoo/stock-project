@@ -218,15 +218,17 @@
                 <h2 class="title">{{ticker}} 뉴스요약</h2>
             </div>
 
-            <!-- carousel multiple -->
-            <div class="carousel-multiple splide">
-                <div class="splide__track">
-                    <ul class="splide__list">
+            <!-- carousel single -->
+            <div class="carousel-single splide splide--loop splide--ltr splide--draggable is-active" id="splide02" style="visibility: visible;">
+                <div class="splide__track" id="splide02-track" style="padding-left: 16px; padding-right: 16px;">
+                    <ul class="splide__list" id="splide02-list" style="transform: translateX(-1384px);">
                         {{#news_summaries}}
-                        <li class="splide__slide">
-                            <div class="blog-card">
-                                <div class="text">
-                                    {{newsSummary}}
+                        <li class="splide__slide" id="splide02-slide02" style="margin-right: 16px; width: 700px;" aria-hidden="true" tabindex="-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {{newsSummary}}
+                                    </p>
                                 </div>
                             </div>
                         </li>
@@ -234,7 +236,7 @@
                     </ul>
                 </div>
             </div>
-            <!-- * carousel multiple -->
+            <!-- * carousel single -->
 
         </div>
         <!-- * News -->
