@@ -4,7 +4,7 @@ import java.util.List;
 
 import hoo.stock_project.model.DTO.StockDailyInfoDTO;
 import hoo.stock_project.model.DTO.StockDailyInfoInterface;
-import hoo.stock_project.model.DTO.StockNewsSummaryInterface;
+import hoo.stock_project.model.DTO.StockNewsInterface;
 
 public interface StockDailyInfoService {
     public List<StockDailyInfoDTO> getOneStockDailyInfo(String ticker, String date);
@@ -15,5 +15,5 @@ public interface StockDailyInfoService {
     public String getMostRecentDate();
 
     public StockDailyInfoInterface getStockDetail(String ticker, String date);
-    public List<StockNewsSummaryInterface> getAllNewsSummary(String ticker, String date);
+    public List<StockNewsInterface> getAllNews(String ticker, String date);
 }

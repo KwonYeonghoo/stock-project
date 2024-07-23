@@ -13,7 +13,7 @@ import hoo.stock_project.model.DTO.PortfolioStockInterface;
 import hoo.stock_project.model.DTO.StockChartInfoDTO;
 import hoo.stock_project.model.DTO.StockDailyInfoInterface;
 import hoo.stock_project.model.DTO.StockListDTO;
-import hoo.stock_project.model.DTO.StockNewsSummaryInterface;
+import hoo.stock_project.model.DTO.StockNewsInterface;
 import hoo.stock_project.model.Service.PortfolioInfoService;
 import hoo.stock_project.model.Service.PortfolioStockInfoService;
 import hoo.stock_project.model.Service.StockChartInfoService;
@@ -73,9 +73,9 @@ public class restController {
     }
 
     @GetMapping("/test2")
-    public List<StockNewsSummaryInterface> getAllNewsSummary(@RequestParam String ticker){
+    public List<StockNewsInterface> getAllNews(@RequestParam String ticker){
         String today = stockDailyInfoService.getMostRecentDate();
-        List<StockNewsSummaryInterface> news_summaries = stockDailyInfoService.getAllNewsSummary(ticker, today);
-        return news_summaries;
+        List<StockNewsInterface> all_news = stockDailyInfoService.getAllNews(ticker, today);
+        return all_news;
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hoo.stock_project.model.DTO.StockDailyInfoInterface;
-import hoo.stock_project.model.DTO.StockNewsSummaryInterface;
+import hoo.stock_project.model.DTO.StockNewsInterface;
 import hoo.stock_project.model.Service.StockDailyInfoService;
 import hoo.stock_project.model.Service.StockListService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,13 +36,13 @@ public class detailController {
     public String getDetailPage(@PathVariable String ticker, Model model){
         String today = stockDailyInfoService.getMostRecentDate();
         StockDailyInfoInterface stock_detail =  stockDailyInfoService.getStockDetail(ticker, today);
-        List<StockNewsSummaryInterface> news_summaries = stockDailyInfoService.getAllNewsSummary(ticker, today);
+        List<StockNewsInterface> all_news = stockDailyInfoService.getAllNews(ticker, today);
         String volume = formatNumber(stock_detail.getVolume());
         String market_cap = formatNumber(stock_detail.getMarketCap());
         model.addAttribute("stock_detail", stock_detail);
         model.addAttribute("formattedVolume", volume);
         model.addAttribute("formattedMarketCap", market_cap);
-        model.addAttribute("news_summaries", news_summaries);
+        model.addAttribute("all_news", all_news);
 
         return "detail";
     }

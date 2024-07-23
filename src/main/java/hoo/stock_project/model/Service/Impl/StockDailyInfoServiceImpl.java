@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import hoo.stock_project.model.DAO.StockDailyInfoDao;
 import hoo.stock_project.model.DTO.StockDailyInfoDTO;
 import hoo.stock_project.model.DTO.StockDailyInfoInterface;
-import hoo.stock_project.model.DTO.StockNewsSummaryInterface;
+import hoo.stock_project.model.DTO.StockNewsInterface;
 import hoo.stock_project.model.Entity.StockDailyInfoEntity;
 import hoo.stock_project.model.Repository.StockDailyInfoRepository;
 import hoo.stock_project.model.Service.StockDailyInfoService;
@@ -45,7 +45,9 @@ public class StockDailyInfoServiceImpl implements StockDailyInfoService{
             dto.setPer(entity.getPer());
             dto.setDividend_rate(entity.getDividend_rate());
             dto.setDividend_yield(entity.getDividend_yield());
-            dto.setNews_summary(entity.getNews_summary());
+            dto.setNewsTitle(entity.getNewsTitle());
+            dto.setNewsLink(entity.getNewsLink());
+            dto.setNewsThumbnail(entity.getNewsThumbnail());
 
             dtos.add(dto);
         }
@@ -98,10 +100,10 @@ public class StockDailyInfoServiceImpl implements StockDailyInfoService{
     }
 
     @Override
-    public List<StockNewsSummaryInterface> getAllNewsSummary(String ticker, String date) {
+    public List<StockNewsInterface> getAllNews(String ticker, String date) {
         // TODO Auto-generated method stub
-        List<StockNewsSummaryInterface> news_summaries = stockDailyInfoRepository.findAllNewsSummary(ticker, date);
-        return news_summaries;
+        List<StockNewsInterface> all_news = stockDailyInfoRepository.findAllNews(ticker, date);
+        return all_news;
     }
 
     @Override

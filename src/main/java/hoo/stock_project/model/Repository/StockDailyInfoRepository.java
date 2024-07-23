@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import hoo.stock_project.model.DTO.StockDailyInfoInterface;
-import hoo.stock_project.model.DTO.StockNewsSummaryInterface;
+import hoo.stock_project.model.DTO.StockNewsInterface;
 import hoo.stock_project.model.Entity.StockDailyInfoEntity;
 public interface StockDailyInfoRepository extends JpaRepository<StockDailyInfoEntity, Integer>{
     @Query(value = "SELECT * FROM stock_daily_info WHERE ticker = :ticker AND date = :date", nativeQuery = true)
@@ -57,9 +57,9 @@ public interface StockDailyInfoRepository extends JpaRepository<StockDailyInfoEn
     public StockDailyInfoInterface findStockDetail(@Param(value = "ticker") String ticker, @Param(value = "today") String date);
     
     @Query(value = """
-            SELECT news_summary
+            SELECT news_title, news_link, news_thumbnail
             FROM stock_daily_info
             WHERE ticker = :ticker AND date = :date
             """, nativeQuery=true)
-    public List<StockNewsSummaryInterface> findAllNewsSummary(@Param(value = "ticker") String ticker, @Param(value = "date") String date);
+    public List<StockNewsInterface> findAllNews(@Param(value = "ticker") String ticker, @Param(value = "date") String date);
 }

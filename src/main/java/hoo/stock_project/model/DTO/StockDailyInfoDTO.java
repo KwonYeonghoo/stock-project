@@ -23,5 +23,7 @@ public class StockDailyInfoDTO {
     private Float dividend_rate;
     private Float dividend_yield;
     private Float per;
-    private String news_summary;
+    private String newsTitle;
+    private String newsLink;
+    private String newsThumbnail;
 }

@@ -215,24 +215,27 @@
         <!-- News -->
         <div class="section full mt-4 mb-4">
             <div class="section-heading padding">
-                <h2 class="title">{{ticker}} 뉴스요약</h2>
+                <h2 class="title">오늘의 {{ticker}} 뉴스</h2>
             </div>
 
             <!-- carousel single -->
             <div class="carousel-single splide splide--loop splide--ltr splide--draggable is-active" id="splide02" style="visibility: visible;">
                 <div class="splide__track" id="splide02-track" style="padding-left: 16px; padding-right: 16px;">
                     <ul class="splide__list" id="splide02-list" style="transform: translateX(-1384px);">
-                        {{#news_summaries}}
+                        {{#all_news}}
                         <li class="splide__slide" id="splide02-slide02" style="margin-right: 16px; width: 700px;" aria-hidden="true" tabindex="-1">
+                            <a href="{{newsLink}}">
+                                <img src="{{newsThumbnail}}" class="card-img-top" alt="image">
+                            </a>
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="card-text">
-                                        {{newsSummary}}
-                                    </p>
+                                    <a href="{{newsLink}}" class="card-text">
+                                        {{newsTitle}}
+                                    </a>
                                 </div>
                             </div>
                         </li>
-                        {{/news_summaries}}
+                        {{/all_news}}
                     </ul>
                 </div>
             </div>
