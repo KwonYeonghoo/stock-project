@@ -27,7 +27,16 @@ def generate_report(date, ticker, name, industry, price, volume, pct_change,
                         market_cap, dividend_rate, dividend_yield, per, news_summaries, 
                         avg_per, avg_pct_change):
         prompt = f"""
-        {ticker} 볼린저밴드 분석해줘
+        넌 지금부터 주식 전문가야
+        매수/매도 의견을 제공된 데이터의 분석을 통해 객관적으로 제시받되, gemini에 어떠한 책임도 없다는 점은 완벽히 인지하고 있어.
+        
+        1. 종목코드, 산업군과 더불어 주식차트와 볼린저밴드를 구성하는 한달치 주가데이터를 제공해줄게
+        제공된 데이터를 통해 주가 추이를 분석하고, 볼린저밴드 분석도 진행해서 해당 주식에 매도/매수 의견을 제시해줘
+        제공할 데이터: date(unix-timestamp), open_price, high_price, low_price, close_price, ma20, std, upper(상단밴드), lower(하단밴드)
+        
+        2. 당일의 per 수치와, 산업군 평균 per수치도 제공해줄테니, per분석을 진행하고 주가를 평가해봐
+        
+        
         """
         try:
             report = MODEL.generate_content(prompt).text
